@@ -65,7 +65,40 @@ python src/scripts/email_security_check.py <domain>
 
 ### API
 
-The API can be accessed at the specified endpoints (to be defined in `api.py`). 
+Run the API server (from the project root):
+```
+uvicorn src.email_security_check.api:app --reload --port 8080
+```
+
+Available routes
+
+- GET /health
+   - Description: basic health check
+   - Example: curl http://localhost:8080/health
+- POST /report
+   - Description: run full checks (SPF, DKIM, DMARC) for a domain. Use JSON body { "domain": "example.com", "aggressive_dkim": true }
+   - Example:
+      ```
+      curl -X POST http://localhost:8080/report \
+         -H "Content-Type: application/json" \
+         -d '{"domain":"example.com"}'
+      ```
+- GET /spf/{domain}
+   - Description: fetch and parse SPF record(s), show parsed details and estimated DNS-lookup count
+   - Example: curl http://localhost:8080/spf/example.com
+- GET /dkim/{domain}
+   - Description: fetch DKIM selector records discovered by heuristics. Query params:
+      - selector: (optional) check a specific selector
+      - aggressive: (optional) use an expanded selector list when discovering
+   - Examples:
+      ```
+      curl http://localhost:8080/dkim/example.com
+      curl "http://localhost:8080/dkim/example.com?selector=default"
+      curl "http://localhost:8080/dkim/example.com?aggressive=true"
+      ```
+- GET /dmarc/{domain}
+   - Description: fetch DMARC TXT record and parsed tags
+   - Example: curl http://localhost:8080/dmarc/example.com
 
 ## Docker
 
