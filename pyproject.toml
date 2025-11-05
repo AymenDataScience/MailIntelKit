@@ -1,0 +1,17 @@
+[project]
+name = "email_security_check"
+version = "0.1.0"
+description = "SPF/DKIM/DMARC checker"
+authors = [{name = "You"}]
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.dependencies]
+dnspython = "*"
+fastapi = "*"
+uvicorn = "*"
+pydantic = "*"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
