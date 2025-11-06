@@ -15,7 +15,7 @@ COPY src ./src
 ENV PYTHONPATH=/app/src
 
 # Expose the port the app runs on
-EXPOSE 8080
+EXPOSE 5000
 
 # Set the entry point for the application
-CMD ["uvicorn", "email_security_check.api:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "email_security_check.api:app", "--host", "0.0.0.0", "--port", "5000"]
