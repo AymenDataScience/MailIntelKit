@@ -4,8 +4,8 @@ Quick start:
 - Create venv: `python -m venv .venv`
 - Install: `pip install -r requirements.txt`
 - CLI: `python email_security_check.py example.com`
-- API: `uvicorn email_security_check.api:app --reload --port 8080`
-- Docker: `docker build -t email-security-check . && docker run -p 8080:8080 email-security-check`
+- API: `uvicorn email_security_check.api:app --reload --port 5000`
+- Docker: `docker build -t email-security-check . && docker run -p 5000:5000 email-security-check`
 
 This project provides a comprehensive tool for checking email authentication mechanisms, specifically SPF, DKIM, and DMARC records. It is designed for cybersecurity professionals and developers who need to assess the email security posture of domains.
 
@@ -67,38 +67,38 @@ python src/scripts/email_security_check.py <domain>
 
 Run the API server (from the project root):
 ```
-uvicorn src.email_security_check.api:app --reload --port 8080
+uvicorn src.email_security_check.api:app --reload --port 5000
 ```
 
 Available routes
 
 - GET /health
    - Description: basic health check
-   - Example: curl http://localhost:8080/health
+   - Example: curl http://localhost:5000/health
 - POST /report
    - Description: run full checks (SPF, DKIM, DMARC) for a domain. Use JSON body { "domain": "example.com", "aggressive_dkim": true }
    - Example:
       ```
-      curl -X POST http://localhost:8080/report \
+      curl -X POST http://localhost:5000/report \
          -H "Content-Type: application/json" \
          -d '{"domain":"example.com"}'
       ```
 - GET /spf/{domain}
    - Description: fetch and parse SPF record(s), show parsed details and estimated DNS-lookup count
-   - Example: curl http://localhost:8080/spf/example.com
+   - Example: curl http://localhost:5000/spf/example.com
 - GET /dkim/{domain}
    - Description: fetch DKIM selector records discovered by heuristics. Query params:
       - selector: (optional) check a specific selector
       - aggressive: (optional) use an expanded selector list when discovering
    - Examples:
       ```
-      curl http://localhost:8080/dkim/example.com
-      curl "http://localhost:8080/dkim/example.com?selector=default"
-      curl "http://localhost:8080/dkim/example.com?aggressive=true"
+   curl http://localhost:5000/dkim/example.com
+   curl "http://localhost:5000/dkim/example.com?selector=default"
+   curl "http://localhost:5000/dkim/example.com?aggressive=true"
       ```
 - GET /dmarc/{domain}
    - Description: fetch DMARC TXT record and parsed tags
-   - Example: curl http://localhost:8080/dmarc/example.com
+   - Example: curl http://localhost:5000/dmarc/example.com
 
 ## Docker
 
