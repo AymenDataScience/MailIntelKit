@@ -74,7 +74,10 @@ Available routes
 
 - GET /health
    - Description: basic health check
-   - Example: curl http://localhost:5000/health
+   - Example: 
+      ```   
+      curl http://localhost:5000/health
+      ```
 - POST /report
    - Description: run full checks (SPF, DKIM, DMARC) for a domain. Use JSON body { "domain": "example.com", "aggressive_dkim": true }
    - Example:
@@ -85,20 +88,26 @@ Available routes
       ```
 - GET /spf/{domain}
    - Description: fetch and parse SPF record(s), show parsed details and estimated DNS-lookup count
-   - Example: curl http://localhost:5000/spf/example.com
+   - Example: 
+      ```
+      curl http://localhost:5000/spf/example.com
+      ```
 - GET /dkim/{domain}
    - Description: fetch DKIM selector records discovered by heuristics. Query params:
       - selector: (optional) check a specific selector
       - aggressive: (optional) use an expanded selector list when discovering
    - Examples:
       ```
-   curl http://localhost:5000/dkim/example.com
-   curl "http://localhost:5000/dkim/example.com?selector=default"
-   curl "http://localhost:5000/dkim/example.com?aggressive=true"
+      curl http://localhost:5000/dkim/example.com
+      curl "http://localhost:5000/dkim/example.com?selector=default"
+      curl "http://localhost:5000/dkim/example.com?aggressive=true"
       ```
 - GET /dmarc/{domain}
    - Description: fetch DMARC TXT record and parsed tags
-   - Example: curl http://localhost:5000/dmarc/example.com
+   - Example: 
+      ```
+      curl http://localhost:5000/dmarc/example.com
+      ```
 
 ## Docker
 
