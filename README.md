@@ -1,4 +1,4 @@
-# Email security check
+# MailIntelKit
 
 Quick start:
 - Create venv: `python -m venv .venv`
