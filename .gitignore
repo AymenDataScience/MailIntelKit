@@ -1,0 +1,30 @@
+# Ignore Python bytecode files
+__pycache__
+*.pyc
+*.pyo
+*.log
+
+# Ignore virtual environment directories
+venv/
+venv-emailsec/
+env/
+.env
+
+# Ignore test output
+*.log
+*.coverage
+htmlcov/
+
+# Ignore IDE/editor specific files
+.vscode
+.idea/
+*.swp
+*.swo
+
+# Ignore other unnecessary files
+*.DS_Store
+*.egg-info/
+dist/
+build/
+.git
+tests
